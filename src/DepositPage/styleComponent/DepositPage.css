@@ -1,0 +1,18 @@
+.btn_deposit {
+    background-color: rgb(89, 89, 238);
+    color: var(--light);
+    margin-top: 2%;
+}
+
+.btn_deposit:hover {
+    background-color: var(--button);
+    color: var(--light);
+    margin-top: 2%;
+}
+
+
+.deposit_title {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 1% 0;
+}

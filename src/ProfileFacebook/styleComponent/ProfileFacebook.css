@@ -1,0 +1,17 @@
+.btn_submit {
+    color: var(--light);
+    background-color: var(--button);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    width: 50px;
+    text-align: center;
+    height: 20px;
+    padding: 0 10px;
+}
+
+.facebook_link {
+    display: flex;
+    width: 80%;
+    border-radius: var(--border-radius);
+    margin: auto;
+}

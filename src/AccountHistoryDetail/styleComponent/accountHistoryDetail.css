@@ -1,0 +1,14 @@
+.detail_type {
+    border-radius: var(--border-radius);
+
+}
+
+.detail_amount {
+    color: var(--button);
+}
+
+.detail_title, .detail_infor {
+    color: var(--button);
+    font-weight: 400;
+    font-size: 18px;
+}
