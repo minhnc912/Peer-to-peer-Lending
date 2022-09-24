@@ -1,3 +1,17 @@
 .id_infor {
     border-radius: var(--border-radius);
 }
+
+.btn_idcard {
+    background-color: var(--button);
+    border-radius: var(--border-radius);
+    color: var(--light);
+    min-height: 50px;
+    min-width: 139px;
+    line-height: 50px;
+    transform: translate(-90px, -10px);
+}
+
+.idcard_image {
+    cursor: pointer;
+}

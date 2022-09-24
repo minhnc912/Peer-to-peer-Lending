@@ -109,7 +109,7 @@ const SideBar = () => {
                     </li>
                     <li className="nav-item">
                         <Link
-                            to="#"
+                            to={PATH.TUTORIAL_PATH}
                             className="nav-link text-dark align-middle px-0"
                         >
                             <AiOutlineInfoCircle className="mb-1" />
@@ -120,7 +120,7 @@ const SideBar = () => {
                     </li>
                     <li className="nav-item">
                         <Link
-                            to="#"
+                            to={PATH.CONTACT_PATH}
                             className="nav-link text-dark align-middle px-0"
                         >
                             <AiOutlineMessage className="mb-1" />
@@ -131,7 +131,7 @@ const SideBar = () => {
                     </li>
                     <li className="nav-item">
                         <Link
-                            to="#"
+                            to={PATH.POLICY_PATH}
                             className="nav-link text-dark align-middle px-0"
                         >
                             <GrCertificate className="mb-1" />

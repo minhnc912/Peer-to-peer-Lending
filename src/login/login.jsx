@@ -124,7 +124,7 @@ const Login = () => {
                     ></img>
                     <h1>Welcome to P2P</h1>
                     <div
-                        className="button-google d-flex m-auto col-10 position-relative"
+                        className="button-google d-flex m-auto my-3 col-10 position-relative"
                         onClick={signInWithGoogle}
                         data-bs-dismiss="modal"
                         aria-label="Close"
@@ -141,7 +141,7 @@ const Login = () => {
                             <strong> Continue with Google</strong>
                         </p>
                     </div>
-                    <div
+                    {/* <div
                         className="button-facebook d-flex m-auto my-3 col-10 position-relative"
                         onClick={signInWithFaceBook}
                         data-bs-dismiss="modal"
@@ -157,7 +157,7 @@ const Login = () => {
                         <p className="d-flex m-auto">
                             <strong> Continue with Facebook</strong>
                         </p>
-                    </div>
+                    </div> */}
                     <div>
                         <p>By continuing, you agree to P2P's</p>
                         <p>

@@ -1,7 +1,8 @@
 import { Select } from "antd";
 import React from "react";
 
-const dropdownSelect = () => {
+const dropdownSelect = (props) => {
+    const { select, setSelect, month, setMonth, SelectAmount } = props;
     const { Option } = Select;
     return (
         <div className="w-100 d-flex justify-content-around">
@@ -9,8 +10,10 @@ const dropdownSelect = () => {
                 <div className="col-6">
                     <Select
                         className="button-select lending_select"
-                        defaultValue="All Month"
+                        value={month}
+                        onChange={(e) => setMonth(e)}
                     >
+                        <Option value="">All Month</Option>
                         <Option value="1">1 months</Option>
                         <Option value="3">3 months</Option>
                         <Option value='6'>6 months</Option>
@@ -20,8 +23,12 @@ const dropdownSelect = () => {
                 <div className="col-6 mb-3">
                     <Select
                         className="button-select lending_select"
-                        defaultValue="All Amount"
+                        value={select}
+                        onChange={(e) => {
+                            SelectAmount(e)
+                        }}
                     >
+                        <Option value=''>All Amount</Option>
                         <Option value='1'>Under 10millions</Option>
                         <Option value='2'>10millions - 50millions </Option>
                         <Option value='3'>50millions - 100millions</Option>

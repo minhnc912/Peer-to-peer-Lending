@@ -3,11 +3,14 @@ import ModalConfirm from "./modal";
 import { axiosService } from "../../axiosService";
 import { Modal } from "antd";
 import { Cookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
+import { PATH } from "../../helper/constant";
 const ButtonLend = (props) => {
     const { title, idDetail, data, minimunAmount, validate, typeLending } = props;
     const cookies = new Cookies();
     const [visibleModal, setVisibleModal] = useState(false);
     const [otpID, setOtpID] = useState(0);
+    const navigate = useNavigate();
 
     const getType = () => {
         if (data?.type_of_lending === 1) {

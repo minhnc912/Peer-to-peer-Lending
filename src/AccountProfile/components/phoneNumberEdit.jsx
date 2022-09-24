@@ -5,6 +5,7 @@ import { axiosService } from "../../axiosService";
 import { Cookies } from "react-cookie";
 import moment from "moment";
 import TextArea from "antd/lib/input/TextArea";
+import { API_KEY } from "../helper/constant";
 
 const PhoneNumberEdit = (props) => {
     const S3_BUCKET = 'demo-s3-images';
@@ -28,20 +29,11 @@ const PhoneNumberEdit = (props) => {
     const [birth, setBirth] = useState(moment(info.user.birth).format('YYYY-MM-DD') || '');
     const phoneRegExp = new RegExp("^[0-9]{9,25}$");
     const cookie = new Cookies();
-
     const [validation, setValidation] = useState({
         phone: {
             valid: false,
             msg: "",
         },
-        fname: {
-            valid: false,
-            msg: "",
-        },
-        lname: {
-            valid: false,
-            msg: "",
-        }
     });
     const valid = () => {
         const temp = {
@@ -49,14 +41,6 @@ const PhoneNumberEdit = (props) => {
                 valid: false,
                 msg: "",
             },
-            fname: {
-                valid: false,
-                msg: "",
-            },
-            lname: {
-                valid: false,
-                msg: "",
-            }
         };
         if (!phone) {
             temp.phone.valid = true;
@@ -68,23 +52,9 @@ const PhoneNumberEdit = (props) => {
             temp.phone.valid = false;
             temp.phone.msg = "";
         }
-        if (!fname) {
-            temp.fname.valid = true;
-            temp.fname.msg = "Please input first name";
-        } else {
-            temp.fname.valid = false;
-            temp.fname.msg = "";
-        }
-        if (!lname) {
-            temp.lname.valid = true;
-            temp.lname.msg = "Please input last name";
-        } else {
-            temp.lname.valid = false;
-            temp.lname.msg = "";
-        }
 
         setValidation(temp);
-        return !temp.phone.valid && !temp.fname.valid && !temp.lname.valid;
+        return !temp.phone.valid;
     };
     const handleCancel = () => {
         setTimeout(() => {
@@ -132,7 +102,7 @@ const PhoneNumberEdit = (props) => {
             setVisibleModal(false);
             setVisible(false);
             Modal.error({
-                title: 'Your phone has verify'
+                title: err.response.data,
             })
         })
     }
@@ -144,11 +114,63 @@ const PhoneNumberEdit = (props) => {
         }
     };
 
+    const handleIdFrontIMG = (e) => {
+        const file = e.target.files[0];
+        const body = new FormData();
+        body.append('image', file);
+        fetch('https://api.fpt.ai/vision/idr/vnm/', {
+            method: 'POST',
+            headers: {
+                "api-key": API_KEY
+            },
+            body
+        }).then((res) => res.json())
+            .then((resFront) => {
+                if (resFront.errorCode !== 0) {
+                    Modal.error({
+                        title: resFront.errorMessage,
+                    })
+                } else {
+                    if (resFront.data[0].type === 'old_back' || resFront.data[0].type === 'new_back') {
+                        Modal.error({
+                            title: 'Please input front of ID card',
+                        })
+                    }
+                }
+            })
+    }
+
+    const handleIdBackIMG = (e) => {
+        const file = e.target.files[0];
+        const body = new FormData();
+        body.append('image', file);
+        fetch('https://api.fpt.ai/vision/idr/vnm/', {
+            method: 'POST',
+            headers: {
+                "api-key": API_KEY
+            },
+            body
+        }).then((res) => res.json())
+            .then((resFront) => {
+                if (resFront.errorCode !== 0) {
+                    Modal.error({
+                        title: resFront.errorMessage,
+                    })
+                } else {
+                    if (resFront.data[0].type === 'old' || resFront.data[0].type === 'new') {
+                        Modal.error({
+                            title: 'Please input back of ID card',
+                        })
+                    }
+                }
+            })
+    }
+
 
     return (
         <>
             <Modal
-                title="Edit phone number"
+                title="Update phone number"
                 closable={false}
                 visible={visibleModal}
                 onOk={handleOk}
@@ -164,34 +186,6 @@ const PhoneNumberEdit = (props) => {
                 >
                     <Input
                         style={{ marginTop: "10px" }}
-                        value={fname}
-                        placeholder="Enter new first name"
-                        onChange={(e) => setFname(e.target.value)}
-                        maxLength={12}
-                    />
-                    {validation.fname.valid && (
-                        <div className="text-danger">{validation.fname.msg}</div>
-                    )}
-                    <Input
-                        style={{ marginTop: "10px" }}
-                        value={lname}
-                        placeholder="Enter new last name"
-                        onChange={(e) => setLname(e.target.value)}
-                        maxLength={12}
-                    />
-                    {validation.lname.valid && (
-                        <div className="text-danger">{validation.lname.msg}</div>
-                    )}
-                    <Input
-                        style={{ marginTop: "10px" }}
-                        value={birth}
-                        placeholder="Enter new birth day"
-                        onChange={(e) => setBirth(e.target.value)}
-                        maxLength={12}
-                        type='date'
-                    />
-                    <Input
-                        style={{ marginTop: "10px" }}
                         value={`${formatPhoneNumberDisplay(phone)}`}
                         placeholder="Enter new phone number"
                         onChange={(e) => setPhone(e.target.value)}
@@ -200,14 +194,6 @@ const PhoneNumberEdit = (props) => {
                     {validation.phone.valid && (
                         <div className="text-danger">{validation.phone.msg}</div>
                     )}
-                    <TextArea
-                        style={{ marginTop: "10px" }}
-                        value={address}
-                        placeholder="Enter new addresss"
-                        onChange={(e) => setAddress(e.target.value)}
-                        type='text'
-                    />
-
                 </Input.Group>
 
             </Modal>

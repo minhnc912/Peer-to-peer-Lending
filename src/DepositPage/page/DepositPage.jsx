@@ -12,6 +12,7 @@ const DepositPage = () => {
     const [ammount, setAmmount] = useState('');
     const [description, setDescription] = useState('');
     const [bank, setBank] = useState('default');
+    const [role, setRole] = useState('default');
     const [language, setLanguage] = useState('default');
 
     const sendData = () => {
@@ -40,6 +41,23 @@ const DepositPage = () => {
                     <div className="col-lg-9">
                         <HeaderTitle title={`${type === 'withdraw' ? 'Withdraw' : 'Deposit'}`} />
                         <div className="deposit_content mt-3">
+                            <div className="deposit_title">
+                                Type account
+                            </div>
+                            <select
+                                value={role}
+                                class="form-select"
+                                aria-label="Default select example"
+                                onChange={(e) => setRole(e.target.value)}
+                            >
+                                <option value={'default'}>Select type account</option>
+                                <option value="invest">
+                                    Invest
+                                </option>
+                                <option value="borrow">
+                                    Borrow
+                                </option>
+                            </select>
                             {type === 'withdraw' &&
                                 <>
                                     <div className="deposit_title">

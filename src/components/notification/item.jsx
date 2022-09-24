@@ -1,8 +1,10 @@
 import { Modal } from "antd";
 import { Link } from "react-router-dom";
 import { axiosService } from "../../axiosService";
+import "./item.css";
+
 const Item = (props) => {
-    const { content, type, id, invest_id, borrow_id } = props;
+    const { hasRead, content, type, id, invest_id, borrow_id } = props;
 
     const getNavi = () => {
         const temp = type.type_noti;
@@ -44,7 +46,7 @@ const Item = (props) => {
     }
     return (
         <Link rel="noopener noreferrer" to={getNavi()} onClick={() => markRead()}>
-            <div className="d-flex">
+            <div className={`d-flex ${hasRead ? 'read' : ''}`}>
                 <img
                     src="https://res.cloudinary.com/da0i1amaa/image/upload/v1653641595/70653wqqs42_lit4nd.png"
                     width="36px"

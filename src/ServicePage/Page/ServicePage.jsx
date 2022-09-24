@@ -22,7 +22,6 @@ const InvestorHomePage = () => {
     const [showMoney, setShowMoney] = useState(false);
     const [info, setInfo] = useState(0);
     const getData = () => {
-        const id = cookies.get("userID");
         axiosService
             .get(`/user/get_detail`)
             .then((res) => {

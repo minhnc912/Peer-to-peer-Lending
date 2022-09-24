@@ -9,8 +9,10 @@ import moment from "moment";
 import { currency } from "../../ulti/ultil";
 import ButtonLend from "../container/buttonLend";
 import { Modal } from "antd";
+import { Cookies } from "react-cookie";
 const LendingDetail = () => {
     const { id } = useParams();
+    const cookies = new Cookies();
     const [data, setData] = useState(null);
     const [minimunAmount, setMinimunAmount] = useState(0);
     const [valid, setValid] = useState({
@@ -32,6 +34,15 @@ const LendingDetail = () => {
                 });
             });
     };
+
+    const checkInvest = (listUser) => {
+        const id = cookies.get("userID");
+        const userInvest = listUser.filter(item => item.user_id == id);
+        if (userInvest.length > 0)
+            return true;
+        return false
+    }
+
     const getType = () => {
         if (data?.type_of_lending === 1) {
             return "Basic";
@@ -412,7 +423,7 @@ const LendingDetail = () => {
 
 
                             {data?.type_of_lending ===
-                                3 && (
+                                3 && !checkInvest(data.investment_requests) &&(
                                     <>
                                         <div className="amount_mul_money m-auto my-3">
                                             <p className="m-0">
@@ -438,7 +449,7 @@ const LendingDetail = () => {
                                         </div>
                                     </>
                                 )}
-                            {data &&
+                            {data && !checkInvest(data.investment_requests) &&
                                 <ButtonLend
                                     title="Accept to invest"
                                     idDetail={id}

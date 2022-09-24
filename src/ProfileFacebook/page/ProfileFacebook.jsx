@@ -23,7 +23,7 @@ const ProfileFacebook = () => {
                                         className="facebook_link"
                                         placeholder="Facebook link"
                                     />
-                                    <div className="btn_submit mt-3 px-3">Submit</div>
+                                    <div className="btn_submit float-end mt-3">Submit</div>
                                 </div>
                             </div>
                         </div>

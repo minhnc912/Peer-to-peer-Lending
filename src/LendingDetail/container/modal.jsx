@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Button, Input, Modal } from "antd";
 import { axiosService } from "../../axiosService";
 import { Cookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
+import { PATH } from "../../helper/constant";
 const ModalConfirm = (props) => {
   const { visibleModal, setVisibleModal, otpID } = props;
   const cookies = new Cookies();
@@ -9,6 +11,7 @@ const ModalConfirm = (props) => {
   const [otp, setOtp] = useState('');
   const [reSend, setReSend] = useState(false);
   const [count, setCount] = useState(60);
+  const navigate = useNavigate();
 
   const handleCancel = () => {
     setVisibleModal(false);
@@ -45,7 +48,7 @@ const ModalConfirm = (props) => {
           okText: 'OK',
           closable: true,
           maskClosable: true,
-          onOk: handleCancel()
+          onOk: navigate(PATH.LENDDING_PATH)
         })
 
       } else {

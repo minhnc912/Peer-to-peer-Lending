@@ -24,6 +24,9 @@ import AccountHistory from "./AccountHisttoryPage/page/AccountHistory";
 import TransactionResult from "./DepositPage/page/TransactionResult";
 import InvestDetail from "./InvestDetail/page/InvestDetail";
 import AccountHistoryDetail from "./AccountHistoryDetail/page/accountHistoryDetail";
+import Tutorial from "./Tutorial/Page/tutorial";
+import Contact from "./Contact/Page/contact";
+import Policy from "./Policy/Page/policy";
 
 const RequireAuth = () => {
     const navi = useNavigate();
@@ -102,6 +105,9 @@ root.render(
                     <Route path="/transaction/:type" element={<DepositPage />} />
                     <Route path="/payment/return" element={<TransactionResult />} />
                     <Route path="/history/detail" element={<AccountHistoryDetail />} />
+                    <Route path="/tutorial" element={<Tutorial />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/policy" element={<Policy />} />
                 </Route>
             </Routes>
         </BrowserRouter>

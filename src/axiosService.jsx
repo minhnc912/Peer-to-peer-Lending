@@ -2,7 +2,7 @@ import axios from "axios";
 import { Cookies } from 'react-cookie';
 export const axiosService = axios.create(
     {
-        baseURL: 'http://localhost:8000/api',
+        baseURL: 'http://18.216.171.133:8000/api',
         headers: {
             'Content-Type': 'application/json',
         }

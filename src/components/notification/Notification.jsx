@@ -7,7 +7,7 @@ import { FaCircle } from 'react-icons/fa'
 import Item from "./item";
 
 const Notification = () => {
-    let count = 0;
+    let count = false;
     const openNotification = () => {
         notification.open({
             message: "Notification Title",
@@ -47,13 +47,12 @@ const Notification = () => {
             const arr = {
                 key: notify[index].id,
                 label: (
-                    <Item content={notify[index].content} type={notify[index]} id={notify[index].id} invest_id={notify[index].invest_id} borrow_id={notify[index].borrow_id} />
+                    <Item hasRead={notify[index].has_read} content={notify[index].content} type={notify[index]} id={notify[index].id} invest_id={notify[index].invest_id} borrow_id={notify[index].borrow_id} />
                 ),
             }
-
-            if (!notify[index].has_read) {
-                rs.push(arr);
-                count++;
+            rs.push(arr);
+            if (notify[index].has_read === null) {
+                count = true;
             }
         }
         return rs;
@@ -70,9 +69,9 @@ const Notification = () => {
     );
 
     return (
-        <Dropdown overlay={menu} placement="bottomRight" arrow>
+        <Dropdown overlayStyle={{ overflowY: 'inherit' }} overlay={menu} placement="bottomRight" arrow>
             <Button className="position-absolute notification">
-                {count > 0 && <FaCircle className="notify-circle" />}
+                {count && <FaCircle className="notify-circle" />}
                 <IoIosNotificationsOutline className="noti-icon" />
             </Button>
         </Dropdown>

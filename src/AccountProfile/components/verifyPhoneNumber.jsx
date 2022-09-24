@@ -75,7 +75,7 @@ const VerifyPhoneNumber = (props) => {
             setVisibleModal(false);
             setVisible(false);
             Modal.error({
-                title: 'Your phone has verify'
+                title: err.response.data,
             })
         })
     }
@@ -119,7 +119,7 @@ const VerifyPhoneNumber = (props) => {
     return (
         <>
             <Modal
-                title="Edit phone number"
+                title="Verify OTP"
                 closable={false}
                 visible={visible}
                 onOk={handleOk}

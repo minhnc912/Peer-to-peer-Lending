@@ -7,12 +7,25 @@
     background-color: #db1111;
     border-radius: var(--border-radius);
     padding: 0px 10px;
+    width: 12%;
+    text-align: center;
+}
+
+.profile_Uncompleted::after {
+    content: "Uncompleted";
+
+}
+
+.profile_completed::after {
+    content: "Completed";
 }
 
 .profile_completed {
     background-color: #11db36;
     border-radius: var(--border-radius);
     padding: 0px 10px;
+    width: 12%;
+    text-align: center;
 }
 
 .profile {
@@ -34,7 +47,13 @@
 }
 
 .btn_update_profile {
-    color: #246F74;
+    color: white;
+    background-color: var(--button);
+    border-radius: var(--border-radius);
     cursor: pointer;
     font-size: 1.2rem;
+}
+
+.edit_infor {
+    cursor: pointer;
 }

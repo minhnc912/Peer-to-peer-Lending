@@ -29,9 +29,6 @@ const Account = () => {
                     <div className="col-9 container">
                         <HeaderTitle title="Account" />
                         <div className="account_list mt-3 ">
-                            <div className="px-3">
-                                <hr className="dropdown-divider"></hr>
-                            </div>
                             <div className="fw-bold text-uppercase px-3 mt-3">
                                 account
                             </div>
@@ -52,22 +49,6 @@ const Account = () => {
                                     alt=""
                                 ></img>
                                 <div className="list_item_text">My profile</div>
-                                <FaAngleRight />
-                            </div>
-                            <div className="px-3">
-                                <hr className="dropdown-divider"></hr>
-                            </div>
-                            <div className="d-flex w-100 m-auto align-items-center list_item px-3" onClick={() => navigate(PATH.BORROWLIMIT_PATH)}>
-                                <img
-                                    src="https://res.cloudinary.com/da0i1amaa/image/upload/v1657788652/293469610_426577486113760_2992466712973871076_n_tloap1.png"
-                                    width="24px"
-                                    height="24px"
-                                    className="me-2"
-                                    alt=""
-                                ></img>
-                                <div className="list_item_text">
-                                    Balance and limit
-                                </div>
                                 <FaAngleRight />
                             </div>
                         </div>
@@ -105,7 +86,8 @@ const Account = () => {
                             <div className="px-3">
                                 <hr className="dropdown-divider"></hr>
                             </div>
-                            <div className="d-flex w-100 m-auto align-items-center list_item px-3">
+                            <div className="d-flex w-100 m-auto align-items-center list_item px-3"
+                            onClick={() => navigate(PATH.CONTACT_PATH)}>
                                 <img
                                     src="https://res.cloudinary.com/da0i1amaa/image/upload/v1657787532/Untitled-as1_eh3f7d.png"
                                     width="24px"
@@ -119,7 +101,7 @@ const Account = () => {
                             <div className="px-3">
                                 <hr className="dropdown-divider"></hr>
                             </div>
-                            <div className="d-flex w-100 m-auto align-items-center list_item px-3">
+                            <div className="d-flex w-100 m-auto align-items-center list_item px-3" onClick={() => navigate(PATH.POLICY_PATH)}>
                                 <img
                                     src="https://res.cloudinary.com/da0i1amaa/image/upload/v1657787531/Untitled-1_zsl32e.png"
                                     width="24px"
@@ -128,7 +110,7 @@ const Account = () => {
                                     alt=""
                                 ></img>
                                 <div className="list_item_text">
-                                    Terms, policy
+                                   Policy, terms
                                 </div>
                                 <FaAngleRight />
                             </div>

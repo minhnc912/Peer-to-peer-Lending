@@ -23,12 +23,39 @@ const LendingPage = () => {
     const [totalPage, setTotalPage] = useState(0);
     const [isLoad, setIsLoad] = useState(false);
     const [info, setInfo] = useState(false);
-
+    const [select, setSelect] = useState('');
+    const [month, setMonth] = useState('');
+    const [minimun, setMinimum] = useState('');
+    const [max, setMax] = useState('');
     const cookies = new Cookies();
 
     const handlePageClick = (e) => {
         setPage(e.selected + 1);
     };
+
+    const SelectAmount = (e) => {
+        if (e === '') {
+            setMinimum('');
+            setMax('');
+        } else if (e === '1') {
+            setMinimum('');
+            setMax('10000000');
+        } else if (e === '2') {
+            setMinimum('10000000');
+            setMax('50000000');
+        } else if (e === '3') {
+            setMinimum('50000000');
+            setMax('100000000');
+        } else {
+            setMinimum('100000000');
+            setMax('');
+        }
+        setSelect(e);
+    }
+
+    useEffect(() => {
+        getData();
+    }, [minimun, max, month])
 
     const getInfo = () => {
         const id = cookies.get("userID");
@@ -46,7 +73,7 @@ const LendingPage = () => {
     };
     const getData = async () => {
         await axiosService
-            .get(`/lending/borrow_request/list?page=${page}&limit=${size}`)
+            .get(`/lending/borrow_request/list?page=${page}&limit=${size}&limit_bottom=${minimun}&limit_top=${max}&term=${month}`)
             .then((res) => {
                 if (res.data) {
                     setListLending(res.data.rows);
@@ -58,6 +85,14 @@ const LendingPage = () => {
                 console.log(err);
             });
     };
+
+    const checkInvest = (listUser) => {
+        const id = cookies.get("userID");
+        const userInvest = listUser.filter(item => item.user_id == id);
+        if (userInvest.length > 0)
+            return true;
+        return false;
+    }
 
     useEffect(() => {
         setIsLoad(true);
@@ -86,7 +121,7 @@ const LendingPage = () => {
                                 </p>
                                 {info &&
                                     <p className="fw-bold fs-5 text-white mx-3">
-                                        {currency.format(info.user.account_informations[0].balance)}
+                                        {currency.format(info.user.account_informations[1].balance)}
                                     </p>
                                 }
 
@@ -107,8 +142,7 @@ const LendingPage = () => {
                                 }
                             </div>
                         </div>
-                        <ButtonSearch title="Search" />
-                        <DropdownSelect />
+                        <DropdownSelect select={select} setSelect={setSelect} month={month} setMonth={setMonth} SelectAmount={SelectAmount} />
                         <Spin spinning={isLoad}>
                             {listLending !== undefined &&
                                 listLending.length !== 0 &&
@@ -125,7 +159,7 @@ const LendingPage = () => {
                                         >
                                             <div style={{ display: 'flex', alignItems: 'center' }}>
                                                 <img style={{ width: '100px', height: '100px', borderRadius: '50%', marginRight: '20px' }}
-                                                    src={item.account.avatar_url} alt="" />
+                                                    src={item.account.avatar_url} alt="avatar" />
                                                 <div className="justify-content-between">
                                                     <div className="d-flex" style={{ marginTop: '15px' }}>
                                                         <Icon
@@ -164,8 +198,9 @@ const LendingPage = () => {
                                                 <button
                                                     className="btn btn-sm button-lend mt-4"
                                                     type="submit"
+                                                    disabled={checkInvest(item.investment_requests)}
                                                 >
-                                                    Invest
+                                                    {checkInvest(item.investment_requests) ? 'Invested' : 'Invest'}
                                                 </button>
                                             </div>
                                         </div>

@@ -305,7 +305,7 @@ const BorrowCreate = () => {
         if (!miniMumInvest) {
             temp.miniMumInvest.valid = true;
             temp.miniMumInvest.msg = "Please input minimum investment amount";
-        } else if (miniMumInvest > expected_money) {
+        } else if (miniMumInvest > Number(expected_money)) {
             console.log(miniMumInvest > expected_money)
             temp.miniMumInvest.valid = true;
             temp.miniMumInvest.msg =
@@ -318,7 +318,7 @@ const BorrowCreate = () => {
             temp.miniMumAmount.valid = true;
             temp.miniMumAmount.msg =
                 "Please input minimum amount required to start applying for a loan";
-        } else if (miniMumAmount > expected_money) {
+        } else if (miniMumAmount > Number(expected_money)) {
             temp.miniMumAmount.valid = true;
             temp.miniMumAmount.msg =
                 "Minimum amount must be less than or equal total amount";
@@ -554,12 +554,11 @@ const BorrowCreate = () => {
                                                 </p>
                                                 <input
                                                     value={miniMumInvest}
-                                                    onChange={(e) =>
-                                                        {
+                                                    onChange={(e) => {
                                                         setMiniMumInvest(
                                                             e.target.value
                                                         )
-                                                        }
+                                                    }
                                                     }
                                                     type="number"
                                                     className="form-control"

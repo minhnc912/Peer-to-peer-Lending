@@ -157,7 +157,7 @@ const BorrowPage = () => {
                         </div>
                         <div>
                             <h3 className="fw-bold text-uppercase">
-                                list of borrow contract
+                                list of your borrow contract
                             </h3>
                         </div>
                         <Spin spinning={loading}>

@@ -3,10 +3,10 @@
     background-color: var(--button);
     border-radius: var(--border-radius);
     cursor: pointer;
-    width: 50px;
     text-align: center;
-    height: 20px;
+    height: 25px;
     padding: 0 10px;
+    margin-right: 13%;
 }
 
 .facebook_link {

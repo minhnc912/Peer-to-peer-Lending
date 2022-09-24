@@ -1,0 +1,17 @@
+.contact_infor {
+    min-height: 420px;
+    background-color: #004e2d;
+    border-radius: var(--border-radius);
+}
+
+.contact_hotline {
+    transform: translate(50px, 20px);
+}
+
+.contact_detail {
+    transform: translateX(100px);
+}
+
+.contact_address {
+    transform: translateY(150px);
+}
